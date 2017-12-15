@@ -13,6 +13,7 @@ export const reducers: ActionReducerMap<ProductsState> = {
   pizzas: fromPizzas.reducer
 };
 
+// top level selectors
 export const getProductsState = createFeatureSelector<ProductsState>(
   "products"
 );
@@ -35,7 +36,14 @@ export const getPizzaState = createSelector(
   (state: ProductsState) => state.pizzas
 );
 
-export const getAllPizzas = createSelector(getPizzaState, fromPizzas.getPizzas);
+export const getPizzasEntities = createSelector(
+  getPizzaState,
+  fromPizzas.getPizzasEntities
+);
+
+export const getAllPizzas = createSelector(getPizzasEntities, entities =>
+  Object.keys(entities).map(id => entities[parseInt(id, 10)])
+);
 export const getAllPizzasLoaded = createSelector(
   getPizzaState,
   fromPizzas.getPizzasLoaded
