@@ -52,7 +52,7 @@ export function reducer(
         entities
       };
     }
-  }
+  } 
 
   return state;
 }
