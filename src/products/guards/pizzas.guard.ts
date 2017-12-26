@@ -23,12 +23,12 @@ export class PizzasGuard implements CanActivate {
 
   checkStore() : Observable<boolean> {
     return this.store.select(fromStore.getPizzasLoaded).pipe(
-      tap(loaded => {
+      tap((loaded: boolean) => {
         if (!loaded) {
           this.store.dispatch(new fromStore.LoadPizzas());
         }
       }),
-      filter(loaded => loaded),
+      filter((loaded: boolean) => loaded),
       take(1)
     );
   }
